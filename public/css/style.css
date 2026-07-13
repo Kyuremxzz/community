@@ -1,0 +1,388 @@
+/* ============================================================
+   TaskForge — identidade visual
+   Papel creme + tinta preta (cartoon anos 1930 / Cuphead),
+   ASCII como matéria-prima de toda a interface.
+   ============================================================ */
+
+:root {
+  --paper: #f2e3c6;
+  --paper-dark: #e8d3ab;
+  --ink: #1d1710;
+  --ink-soft: #3d3225;
+  --red: #b8321f;
+  --gold: #c98a1b;
+  --teal: #1f6f63;
+  --screen: #171310; /* "telinha" escura onde as formas 3D giram */
+  --screen-ink: #f2e3c6;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Cascadia Mono", "Consolas", "Courier New", monospace;
+  background-color: var(--paper);
+  /* textura de meio-tom (halftone) de impressão antiga */
+  background-image: radial-gradient(circle, rgba(29, 23, 16, 0.07) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+  color: var(--ink);
+  line-height: 1.45;
+  overflow-x: hidden;
+}
+
+pre {
+  font-family: inherit;
+  line-height: 1.05;
+  white-space: pre;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+a { color: var(--red); font-weight: bold; }
+
+/* ---------- casca do app ---------- */
+
+#app {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 12px 18px 80px;
+}
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 10px 0 6px;
+  border-bottom: 4px double var(--ink);
+  margin-bottom: 18px;
+}
+
+.topbar .logo {
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--ink);
+  text-shadow: 2px 2px 0 rgba(184, 50, 31, 0.35);
+  user-select: none;
+}
+
+.topbar .logo:hover { color: var(--red); }
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 4px;
+}
+
+.userchip {
+  border: 2px solid var(--ink);
+  background: var(--paper-dark);
+  padding: 3px 10px;
+  font-size: 13px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.userchip .sub-badge { color: var(--teal); font-weight: bold; }
+.userchip .free-badge { color: var(--gold); font-weight: bold; }
+
+/* ---------- botões estilo cartaz ---------- */
+
+.btn {
+  display: inline-block;
+  border: 3px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: bold;
+  font-size: 14px;
+  padding: 7px 16px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.06s, box-shadow 0.06s;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn:hover { transform: translate(-1px, -1px) rotate(-0.6deg); box-shadow: 5px 5px 0 var(--ink); }
+.btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--ink); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: 4px 4px 0 var(--ink); }
+
+.btn-red { background: var(--red); color: var(--paper); }
+.btn-gold { background: var(--gold); color: var(--ink); }
+.btn-teal { background: var(--teal); color: var(--paper); }
+.btn-sm { font-size: 12px; padding: 4px 10px; box-shadow: 3px 3px 0 var(--ink); }
+.btn-ghost { background: transparent; box-shadow: none; border-style: dashed; }
+
+/* ---------- cartões e molduras ---------- */
+
+.boilbox {
+  position: relative;
+  padding: 26px 30px;
+  margin: 10px 0 22px;
+}
+
+.card {
+  position: relative;
+  padding: 22px 26px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.card:hover { background: rgba(201, 138, 27, 0.10); }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+/* "telinha" escura para animações 3D */
+.crt {
+  background: var(--screen);
+  color: var(--screen-ink);
+  border: 3px solid var(--ink);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8), 4px 4px 0 var(--ink);
+  padding: 6px 8px;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 1.0;
+}
+
+.crt-amber { color: #e8b04a; }
+.crt-red { color: #e06248; }
+.crt-teal { color: #6fd0bf; }
+
+/* ---------- tipografia de circo ---------- */
+
+h1.showtitle, .ascii-banner {
+  font-size: 10px;
+  line-height: 1.05;
+  margin: 4px 0 14px;
+  overflow-x: auto;
+}
+
+h2 {
+  font-size: 19px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 3px solid var(--ink);
+  display: inline-block;
+  padding: 0 6px 1px 0;
+  margin-bottom: 10px;
+}
+
+h3 { font-size: 15px; text-transform: uppercase; margin-bottom: 6px; }
+
+.tagline { font-style: italic; color: var(--ink-soft); margin-bottom: 14px; min-height: 22px; }
+
+.muted { color: var(--ink-soft); font-size: 13px; }
+.small { font-size: 12px; }
+
+/* selos de dificuldade — estilo carimbo */
+.stamp {
+  display: inline-block;
+  border: 2px solid currentColor;
+  padding: 1px 8px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: rotate(-2deg);
+  background: var(--paper);
+}
+.stamp-iniciante { color: var(--teal); }
+.stamp-intermediario { color: var(--gold); }
+.stamp-avancado { color: var(--red); }
+
+.stamp-status { transform: rotate(1.5deg); }
+.stamp-forming { color: var(--ink-soft); border-style: dashed; }
+.stamp-active { color: var(--red); }
+.stamp-delivered { color: var(--teal); }
+
+/* ---------- formulários ---------- */
+
+.field { margin-bottom: 12px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+
+.field input, .field select, .field textarea {
+  width: 100%;
+  border: 3px solid var(--ink);
+  background: #fbf3e0;
+  padding: 7px 10px;
+  font-size: 14px;
+  box-shadow: inset 3px 3px 0 rgba(29, 23, 16, 0.12);
+}
+
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 3px solid var(--gold);
+  outline-offset: 1px;
+}
+
+.form-narrow { max-width: 430px; }
+
+.error-note {
+  border: 3px dashed var(--red);
+  color: var(--red);
+  font-weight: bold;
+  padding: 8px 12px;
+  margin: 10px 0;
+  background: rgba(184, 50, 31, 0.06);
+}
+
+.ok-note {
+  border: 3px dashed var(--teal);
+  color: var(--teal);
+  font-weight: bold;
+  padding: 8px 12px;
+  margin: 10px 0;
+}
+
+/* ---------- layout de telas específicas ---------- */
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 760px) {
+  .split { grid-template-columns: 1fr; }
+}
+
+.squad-row {
+  border-top: 2px dashed var(--ink-soft);
+  padding: 14px 2px;
+}
+
+.slot-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+.meter-pre { font-size: 12px; line-height: 1.1; overflow-x: auto; }
+
+.countdown-pre {
+  font-size: 11px;
+  line-height: 1.05;
+  overflow-x: auto;
+}
+
+.mascot-pre { font-size: 12px; line-height: 1.05; }
+
+.tutorial ol { margin: 10px 0 10px 22px; }
+.tutorial li { margin-bottom: 8px; }
+.tutorial code {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 1px 6px;
+  font-size: 13px;
+}
+
+/* ---------- modal (paywall etc.) ---------- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(23, 19, 16, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 60;
+  padding: 20px;
+}
+
+.modal {
+  position: relative;
+  background: var(--paper);
+  background-image: radial-gradient(circle, rgba(29, 23, 16, 0.07) 1px, transparent 1.4px);
+  background-size: 9px 9px;
+  max-width: 560px;
+  width: 100%;
+  padding: 30px 34px;
+  border: 4px solid var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+.modal .modal-close {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ---------- toast ---------- */
+
+.toast {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  outline: 3px solid var(--ink);
+  padding: 10px 18px;
+  font-weight: bold;
+  z-index: 80;
+  max-width: 90vw;
+}
+
+/* ---------- overlay do iris wipe (a engine cria .asciifx-iris) ---------- */
+
+.asciifx-iris {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: transparent;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* ---------- demais ganchos de classe que a engine adiciona/remove
+   em runtime (spin, boil, slotMeter, countdown, mascot, typewriter) —
+   o conteúdo é sempre texto puro dentro de <pre>/.crt, então essas
+   classes controlam apenas nuances de cor dentro do tema já definido
+   acima para .crt/.crt-*; mantidas explícitas para não ficarem "mortas". ---------- */
+
+.asciifx-boil { color: inherit; }
+.asciifx-spin { color: inherit; }
+.asciifx-slotmeter { color: inherit; }
+.asciifx-countdown { color: inherit; }
+.asciifx-mascot { color: inherit; }
+.asciifx-typewriter { color: inherit; }
+
+/* rodapé */
+.footer {
+  margin-top: 40px;
+  border-top: 4px double var(--ink);
+  padding-top: 8px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}

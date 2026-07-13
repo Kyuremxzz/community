@@ -1,0 +1,14 @@
+{
+  "name": "taskforge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "TaskForge — comunidade de estudo de programação com squads, prazos e estética ASCII retro",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node --no-warnings server/server.js",
+    "test": "node --no-warnings --test"
+  },
+  "engines": {
+    "node": ">=22.5"
+  }
+}

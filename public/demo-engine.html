@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AsciiFX — demo da engine (TaskForge)</title>
+<style>
+  :root {
+    --bg: #171310;
+    --ink: #f2e3c6;
+    --ink-dim: #b9a583;
+    --accent: #e8a33d;
+    --panel: #201a15;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 28px 80px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+  h1 { margin: 0 0 4px; font-size: 20px; letter-spacing: 2px; }
+  h2 {
+    margin: 42px 0 4px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  h2::before { content: ">> "; color: var(--ink-dim); }
+  p.hint { margin: 0 0 14px; color: var(--ink-dim); font-size: 12px; }
+  pre {
+    margin: 0;
+    white-space: pre;
+    line-height: 1.08;
+    font-family: inherit;
+  }
+  .row { display: flex; flex-wrap: wrap; gap: 26px; align-items: flex-start; }
+  .cell { background: var(--panel); padding: 10px 12px; border-radius: 4px; }
+  .cell .lbl {
+    color: var(--ink-dim);
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+  .spin-pre { font-size: 11px; }
+  .mascot-pre { font-size: 14px; min-height: 13em; }
+  .big-pre { font-size: 10px; }
+  /* containers do boil: padding gordo para a moldura viva nao invadir o conteudo */
+  .boil-box {
+    padding: 34px 44px;
+    min-height: 140px;
+    background: var(--panel);
+    border-radius: 4px;
+  }
+  /* classes asciifx-* que a engine adiciona — tema por conta do CSS externo */
+  .asciifx-boil { color: var(--accent); }
+  .asciifx-iris { color: var(--ink); background: transparent; }
+  .asciifx-countdown { color: var(--ink); }
+  button {
+    background: var(--accent);
+    color: #241a08;
+    border: 3px solid #f2e3c6;
+    border-radius: 2px;
+    box-shadow: 4px 4px 0 #000;
+    font-family: inherit;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 10px 18px;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  button:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 #000; }
+  button.ghost { background: transparent; color: var(--ink); }
+  .toolbar {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    display: flex;
+    gap: 12px;
+    z-index: 500;
+  }
+  .status { color: var(--ink-dim); font-size: 12px; margin-top: 10px; }
+</style>
+</head>
+<body>
+
+  <h1>ASCIIFX — DEMO DA ENGINE</h1>
+  <p class="hint">TaskForge · engine visual ASCII estilo rubber-hose. Cada secao exercita uma funcao da API.</p>
+
+  <h2>AsciiFX.title(text)</h2>
+  <p class="hint">Banner figlet gerado como string (nao anima, nao toca DOM — o script injeta via textContent).</p>
+  <pre id="title-out" class="big-pre"></pre>
+
+  <h2>AsciiFX.typewriter(el, text, opts)</h2>
+  <p class="hint">Texto letra a letra com cursor piscando (cps: 28).</p>
+  <pre id="type-out"></pre>
+
+  <h2>AsciiFX.spin(el, opts)</h2>
+  <p class="hint">5 formas 3D reais (perspectiva + z-buffer + rampa de luminancia), girando em 2 eixos simultaneamente.</p>
+  <div class="row">
+    <div class="cell"><div class="lbl">mug (mascote)</div><pre id="spin-mug" class="spin-pre"></pre></div>
+    <div class="cell"><div class="lbl">donut</div><pre id="spin-donut" class="spin-pre"></pre></div>
+    <div class="cell"><div class="lbl">cube</div><pre id="spin-cube" class="spin-pre"></pre></div>
+    <div class="cell"><div class="lbl">star</div><pre id="spin-star" class="spin-pre"></pre></div>
+    <div class="cell"><div class="lbl">diamond</div><pre id="spin-diamond" class="spin-pre"></pre></div>
+  </div>
+
+  <h2>AsciiFX.mascot(el, mood)</h2>
+  <p class="hint">Chico Caneca, o mascote rubber-hose, em tres humores.</p>
+  <div class="row">
+    <div class="cell"><div class="lbl">idle</div><pre id="mascot-idle" class="mascot-pre"></pre></div>
+    <div class="cell"><div class="lbl">cheer</div><pre id="mascot-cheer" class="mascot-pre"></pre></div>
+    <div class="cell"><div class="lbl">sad</div><pre id="mascot-sad" class="mascot-pre"></pre></div>
+  </div>
+
+  <h2>AsciiFX.boil(el, opts) + AsciiFX.slotMeter(el, filled, total, roleNames)</h2>
+  <p class="hint">Moldura "cel boiling" (~8fps, traco vivo) ao redor de conteudo real — aqui, o medidor de vagas do squad.</p>
+  <div class="row">
+    <div id="boil-a" class="boil-box">
+      <pre id="slots-out"></pre>
+    </div>
+    <div id="boil-b" class="boil-box">
+      <pre id="boil-b-text">Missao da semana:
+construir um parser de Markdown
+em par com o squad.
+
+Recompensa: +250 xp</pre>
+    </div>
+  </div>
+
+  <h2>AsciiFX.countdown(el, endsAtMs)</h2>
+  <p class="hint">Prazo futuro (relogio grande DDd HH:MM:SS) e prazo estourado (piscando PRAZO ESTOURADO).</p>
+  <div class="row">
+    <div class="cell"><div class="lbl">entrega em</div><pre id="count-future" class="big-pre"></pre></div>
+    <div class="cell"><div class="lbl">ja estourou</div><pre id="count-past" class="big-pre"></pre></div>
+  </div>
+
+  <h2>AsciiFX.irisWipe(onMidpoint)</h2>
+  <p class="hint">Transicao circular estilo cartoon (~700ms). No meio, o banner abaixo troca de texto.</p>
+  <button id="btn-iris">Rodar iris wipe</button>
+  <pre id="iris-target" class="big-pre" style="margin-top:14px"></pre>
+
+  <div class="toolbar">
+    <button id="btn-restart" class="ghost">Restart</button>
+    <button id="btn-stop">Stop all</button>
+  </div>
+  <p class="status" id="status"></p>
+
+<script src="js/ascii-engine.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var handles = [];
+  var irisFlip = false;
+
+  function track(h) { handles.push(h); return h; }
+
+  function startAll() {
+    // title — string pura, sem DOM
+    $('title-out').textContent =
+      AsciiFX.title('TASKFORGE') + '\n\n' + AsciiFX.title('DEMO 2026');
+
+    // typewriter
+    track(AsciiFX.typewriter($('type-out'),
+      'Bem-vindo ao TaskForge. Monte seu squad, aceite a missao e forje codigo.',
+      { cps: 28 }));
+
+    // spin — 5 formas simultaneas
+    track(AsciiFX.spin($('spin-mug'),     { shape: 'mug',     width: 56, height: 24 }));
+    track(AsciiFX.spin($('spin-donut'),   { shape: 'donut',   width: 56, height: 24 }));
+    track(AsciiFX.spin($('spin-cube'),    { shape: 'cube',    width: 46, height: 20, speed: 0.8 }));
+    track(AsciiFX.spin($('spin-star'),    { shape: 'star',    width: 46, height: 20, speed: 0.7 }));
+    track(AsciiFX.spin($('spin-diamond'), { shape: 'diamond', width: 46, height: 20, speed: 1.2 }));
+
+    // mascote nos tres humores
+    track(AsciiFX.mascot($('mascot-idle'), 'idle'));
+    track(AsciiFX.mascot($('mascot-cheer'), 'cheer'));
+    track(AsciiFX.mascot($('mascot-sad'), 'sad'));
+
+    // slotMeter (estatico) dentro de moldura boil
+    AsciiFX.slotMeter($('slots-out'), 3, 5,
+      ['Frontend', 'Backend', 'Mobile', 'DevOps', 'QA']);
+    track(AsciiFX.boil($('boil-a'), { title: 'SQUAD ROSQUINHA' }));
+    track(AsciiFX.boil($('boil-b'), { title: 'MISSAO' }));
+
+    // countdown: um no futuro, um estourado
+    track(AsciiFX.countdown($('count-future'),
+      Date.now() + 2 * 86400e3 + 3 * 3600e3 + 25 * 60e3 + 42e3));
+    track(AsciiFX.countdown($('count-past'), Date.now() - 5000));
+
+    // alvo do iris wipe
+    $('iris-target').textContent = AsciiFX.title(irisFlip ? 'TELA B' : 'TELA A');
+
+    $('status').textContent = 'Rodando ' + handles.length + ' animacoes.';
+  }
+
+  function stopAll() {
+    for (var i = 0; i < handles.length; i++) {
+      try { handles[i].stop(); } catch (e) { /* handle ja parado */ }
+    }
+    handles = [];
+    $('status').textContent =
+      'Tudo parado — nenhum rAF/timer vivo. Clique em Restart para religar.';
+  }
+
+  $('btn-stop').addEventListener('click', stopAll);
+  $('btn-restart').addEventListener('click', function () {
+    stopAll();
+    startAll();
+  });
+
+  $('btn-iris').addEventListener('click', function () {
+    var btn = $('btn-iris');
+    btn.disabled = true;
+    AsciiFX.irisWipe(function () {
+      irisFlip = !irisFlip;
+      $('iris-target').textContent = AsciiFX.title(irisFlip ? 'TELA B' : 'TELA A');
+    }).then(function () {
+      btn.disabled = false;
+    });
+  });
+
+  startAll();
+})();
+</script>
+</body>
+</html>

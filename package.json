@@ -1,14 +1,26 @@
 {
   "name": "taskforge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "TaskForge — comunidade de estudo de programação com squads, prazos e estética ASCII retro",
-  "type": "commonjs",
+  "description": "TaskForge — comunidade de estudo de programação com squads, prazos e animações ASCII",
   "scripts": {
-    "start": "node --no-warnings server/server.js",
-    "test": "node --no-warnings --test"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "engines": {
     "node": ">=22.5"
+  },
+  "dependencies": {
+    "next": "^15.5.20",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
   }
 }

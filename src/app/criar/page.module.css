@@ -1,0 +1,59 @@
+/* /criar — prancheta do projeto: formulário + estrela girando. */
+
+.tagline {
+  font-size: 15px;
+  color: var(--text-secondary);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.showcase {
+  position: sticky;
+  top: 84px;
+}
+
+.rolesFieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rolesLegend {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.roleRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.roleInput {
+  flex: 1;
+}
+
+.error {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+@media (max-width: 880px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .showcase {
+    position: static;
+  }
+}

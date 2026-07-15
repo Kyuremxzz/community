@@ -1,0 +1,34 @@
+/* Paywall — split mascote + texto dentro do modal. */
+
+.split {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.copy > div {
+  margin-top: 8px;
+}
+
+.price {
+  color: var(--text-secondary);
+}
+
+.fine {
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+
+@media (max-width: 520px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,60 @@
+/* / (catálogo) — vitrine de dificuldades + grid de cartazes. */
+
+.tagline {
+  font-size: 15px;
+  color: var(--text-secondary);
+  min-height: 1.6em;
+}
+
+.vitrine {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.vitrineLabel {
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+.cardLink {
+  display: block;
+  height: 100%;
+  color: inherit;
+}
+
+.cardLink:hover {
+  color: inherit;
+}
+
+.projectCard {
+  height: 100%;
+}
+
+.cardDesc {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.cardRoles {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.cardSlots {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.member {
+  color: var(--teal);
+}
+
+@media (max-width: 880px) {
+  .vitrine {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,12 @@
+/* Shell da página: topbar + main flexível + footer colado embaixo. */
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+}

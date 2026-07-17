@@ -1,0 +1,41 @@
+/* /comunidade/[id] — detalhe do post + comentários. */
+
+.back {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.back:hover {
+  color: var(--accent);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.commentsError {
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.emptyComments {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+}

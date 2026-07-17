@@ -1,0 +1,21 @@
+/* SearchBar — campo de busca com prompt mono discreto. */
+
+.wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.prompt {
+  position: absolute;
+  left: 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.input {
+  width: 100%;
+  padding-left: 32px;
+}

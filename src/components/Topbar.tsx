@@ -42,6 +42,9 @@ export default function Topbar() {
         </Link>
 
         <nav className={styles.actions} aria-label="Conta e navegação">
+          <Link href="/comunidade" className="btn btn--ghost btn--sm">
+            Comunidade
+          </Link>
           {loading ? null : user ? (
             <>
               <span className={styles.userchip} title={user.email}>

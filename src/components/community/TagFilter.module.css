@@ -1,0 +1,47 @@
+/* TagFilter — chips de filtro por tipo de post. */
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  background: transparent;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: var(--text-tertiary);
+}
+
+.chip:active {
+  transform: translateY(1px);
+}
+
+.chipActive {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* tons por tipo quando selecionado, espelhando POST_TYPE_META */
+.chipActive.tone-coral   { border-color: var(--accent); color: var(--accent); background: var(--accent-muted); }
+.chipActive.tone-teal    { border-color: var(--teal); color: var(--teal); background: var(--teal-muted); }
+.chipActive.tone-gold    { border-color: var(--gold); color: var(--gold); background: var(--gold-muted); }
+.chipActive.tone-neutral { border-color: var(--text-tertiary); color: var(--text); }

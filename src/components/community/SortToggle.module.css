@@ -1,0 +1,36 @@
+/* SortToggle — alternador segmentado "Recentes" / "Mais populares". */
+
+.group {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2px;
+  background: var(--bg-elevated);
+}
+
+.option {
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.option:hover {
+  color: var(--text);
+}
+
+.optionActive {
+  background: var(--accent);
+  color: var(--accent-contrast);
+}
+
+.optionActive:hover {
+  color: var(--accent-contrast);
+}

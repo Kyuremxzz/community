@@ -135,3 +135,103 @@ export interface DeliverResponse {
   showGithubTutorial: boolean;
   message: string;
 }
+
+/* ------------------------------------------------------------------ */
+/* Comunidade (posts/comentários/curtidas/reposts) — feature nova       */
+/* ------------------------------------------------------------------ */
+
+export type PostType = "projeto" | "duvida" | "discussao" | "ajuda";
+
+export interface PostAuthor {
+  id: number;
+  name: string;
+}
+
+export interface PostSummary {
+  id: number;
+  type: PostType;
+  title: string;
+  body: string;
+  imageUrl: string | null;
+  linkUrl: string | null;
+  projectId: number | null;
+  projectTitle: string | null;
+  author: PostAuthor;
+  createdAt: number;
+}
+
+export interface Post extends PostSummary {
+  likeCount: number;
+  likedByMe: boolean;
+  commentCount: number;
+  repostCount: number;
+  repostedByMe: boolean;
+  repostOf: PostSummary | null;
+  repostComment: string | null;
+}
+
+export interface Comment {
+  id: number;
+  postId: number;
+  parentId: number | null;
+  author: PostAuthor;
+  body: string;
+  createdAt: number;
+  likeCount: number;
+  likedByMe: boolean;
+  replies: Comment[];
+}
+
+/** GET /api/posts. */
+export interface PostsResponse {
+  posts: Post[];
+  hasMore: boolean;
+}
+
+/** GET/POST /api/posts[/:id]. */
+export interface PostResponse {
+  post: Post;
+}
+
+/** POST /api/posts/:id/repost. */
+export interface RepostResponse {
+  reposted: boolean;
+  post: Post;
+}
+
+/** POST /api/posts/:id/like. */
+export interface PostLikeResponse {
+  id: number;
+  likeCount: number;
+  likedByMe: boolean;
+}
+
+/** GET /api/posts/:id/comments. */
+export interface CommentsResponse {
+  comments: Comment[];
+}
+
+/** POST /api/posts/:id/comments. */
+export interface CommentResponse {
+  comment: Comment;
+}
+
+/** POST /api/comments/:id/like. */
+export interface CommentLikeResponse {
+  id: number;
+  likeCount: number;
+  likedByMe: boolean;
+}
+
+/** GET /api/users/:id. */
+export interface PublicProfile {
+  id: number;
+  name: string;
+  subscribed: boolean;
+}
+
+export interface ProfileResponse {
+  profile: PublicProfile;
+  posts: Post[];
+  squads: SquadWithProjectResponse[];
+}

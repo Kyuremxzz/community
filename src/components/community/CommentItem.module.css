@@ -1,0 +1,105 @@
+/* CommentItem — comentário recursivo com respostas aninhadas. A partir de
+   MAX_INDENT_DEPTH a indentação para de crescer, mas a linha de conexão
+   (border-left) continua marcando a thread, como no Reddit. */
+
+.item {
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.author {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.author:hover {
+  color: var(--accent-hover);
+}
+
+.date {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.actionBtn {
+  background: none;
+  border: none;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: color var(--dur-fast) var(--ease-out), background-color var(--dur-fast) var(--ease-out);
+}
+
+.actionBtn:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.actionBtnLiked {
+  color: var(--accent);
+}
+
+.actionBtnLiked:hover {
+  color: var(--accent-hover);
+}
+
+.replyForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.replyError {
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.replyActions {
+  display: flex;
+  gap: 8px;
+}
+
+.replies {
+  margin-top: 12px;
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

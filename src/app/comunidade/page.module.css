@@ -1,0 +1,38 @@
+/* /comunidade — feed principal. */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.search {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.empty {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 32px;
+  align-items: center;
+}
+
+.loadMore {
+  display: flex;
+  justify-content: center;
+}
+
+.actionError {
+  font-size: 13px;
+  color: var(--accent);
+  text-align: center;
+}
+
+@media (max-width: 880px) {
+  .empty {
+    grid-template-columns: 1fr;
+  }
+}

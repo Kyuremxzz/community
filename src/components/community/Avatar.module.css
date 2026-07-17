@@ -1,0 +1,29 @@
+/* Avatar — círculo de iniciais, paleta fixa de 6 tons determinísticos. */
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  line-height: 1;
+  user-select: none;
+}
+
+.sm { width: 24px; height: 24px; font-size: 10px; }
+.md { width: 40px; height: 40px; font-size: 14px; }
+.lg { width: 64px; height: 64px; font-size: 20px; }
+
+/* Paleta de avatares: os 4 tons de apoio já definidos em globals.css
+   (coral/teal/gold/green) + 2 tons extras na mesma linguagem (sólido sobre
+   fundo translúcido), só para dar variedade suficiente a uma lista de
+   pessoas distintas. Escopo local ao Avatar — não viraram tokens globais
+   porque só este componente precisa deles. */
+.tone-0 { color: var(--accent); background: var(--accent-muted); }
+.tone-1 { color: var(--teal); background: var(--teal-muted); }
+.tone-2 { color: var(--gold); background: var(--gold-muted); }
+.tone-3 { color: var(--green); background: color-mix(in srgb, var(--green) 14%, transparent); }
+.tone-4 { color: #5b9bd9; background: color-mix(in srgb, #5b9bd9 14%, transparent); }
+.tone-5 { color: #a78bfa; background: color-mix(in srgb, #a78bfa 14%, transparent); }

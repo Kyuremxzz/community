@@ -1,0 +1,208 @@
+/* PostCard — card de post no feed da Comunidade. */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.repostHeader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.02em;
+}
+
+.repostHeader a {
+  color: var(--text-secondary);
+}
+
+.repostHeader a:hover {
+  color: var(--text);
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.headMeta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.headTop {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.authorName {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.authorName:hover {
+  color: var(--accent-hover);
+}
+
+.date {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.text {
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.moreBtn {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.moreBtn:hover {
+  color: var(--accent-hover);
+}
+
+.image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.chipRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+a.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.embed {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.embedHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.embedAuthor {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.embedDate {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.embedTitle {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.embedText {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.embedImage {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+}
+
+.actionBtn {
+  gap: 6px !important;
+  color: var(--text-tertiary) !important;
+}
+
+.actionBtn:hover:not(:disabled) {
+  color: var(--text) !important;
+}
+
+.actionBtnLiked {
+  color: var(--accent) !important;
+}
+
+.actionBtnLiked:hover:not(:disabled) {
+  color: var(--accent-hover) !important;
+}
+
+.actionBtnReposted {
+  color: var(--teal) !important;
+}
+
+.actionBtnReposted:hover:not(:disabled) {
+  color: var(--teal) !important;
+}
+
+@media (max-width: 640px) {
+  .actions {
+    justify-content: space-between;
+  }
+}

@@ -6,6 +6,12 @@
 import { NextResponse } from "next/server";
 import { getSessionUser } from "@/lib/auth";
 import {
+  getCommentRow,
+  getPostJoinRow,
+  type CommentDbRow,
+  type PostJoinRow,
+} from "@/lib/db/community";
+import {
   getProjectRow,
   getSquadRow,
   type ProjectRow,
@@ -107,4 +113,16 @@ export function getSquadOr404(id: number): SquadRow {
   const s = getSquadRow(id);
   if (!s) throw new ApiError(404, "not_found", "Squad não encontrado.");
   return s;
+}
+
+export function getPostOr404(id: number): PostJoinRow {
+  const p = getPostJoinRow(id);
+  if (!p) throw new ApiError(404, "not_found", "Post não encontrado.");
+  return p;
+}
+
+export function getCommentOr404(id: number): CommentDbRow {
+  const c = getCommentRow(id);
+  if (!c) throw new ApiError(404, "not_found", "Comentário não encontrado.");
+  return c;
 }

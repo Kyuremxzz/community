@@ -6,7 +6,7 @@
 /out/
 next-env.d.ts
 
-# banco local
+# banco local (inclui data/uploads/ — imagens de post enviadas pelos usuários)
 /data/
 
 # misc

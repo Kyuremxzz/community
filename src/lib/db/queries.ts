@@ -3,7 +3,14 @@
  * Porte fiel de `userPublic`, `squadView` e `projectView` do legado
  * (`legacy/server/server.js`) — os shapes JSON são idênticos.
  */
-import type { Difficulty, Project, Squad, SquadStatus, User } from "@/lib/types";
+import type {
+  Difficulty,
+  Project,
+  Squad,
+  SquadStatus,
+  SquadWithProjectResponse,
+  User,
+} from "@/lib/types";
 import { getDb } from "./index";
 
 export const WEEK_MS = 7 * 86400000;
@@ -359,4 +366,23 @@ export function projectView(
   };
   if (withSquads) base.squads = squads;
   return base;
+}
+
+/**
+ * Squads (com projeto) de `targetUserId`, sob o olhar de `viewerId` (decide
+ * `isMember`/`mine` nas views). Reaproveitado por `GET /api/me/squads`
+ * (target = viewer) e `GET /api/users/:id` (perfil público de outro usuário).
+ */
+export function squadsWithProjectForUser(
+  targetUserId: number,
+  viewerId: number | null
+): SquadWithProjectResponse[] {
+  return squadRowsOfUser(targetUserId).map((sq) => {
+    // squads.project_id tem FK ON DELETE CASCADE — se o squad existe, o projeto existe.
+    const p = getProjectRow(sq.project_id) as ProjectRow;
+    return {
+      squad: squadView(sq, viewerId),
+      project: projectView(p, viewerId, false),
+    };
+  });
 }
